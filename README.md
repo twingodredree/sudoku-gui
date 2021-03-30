@@ -1,4 +1,13 @@
 # sudoku-gui
+![数独](sudoku_generator.gif)
 
-### ビルド方法
-pyinstaller sudoku2.py --onefile --noconsol
+## explanation
+Each time you press the spacebar, the application generate Sudoku.
+
+## build
+```
+pyinstaller sudoku2.py --onefile --noconsole
+```
+
+## version
+Python 3.7.7
