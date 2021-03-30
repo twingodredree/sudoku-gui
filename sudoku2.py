@@ -6,37 +6,54 @@ from tkinter import *
 # Space押したら新しく生成
 # 常時描画するもの 枠
 # 更新時変わるもの　数字
-# 
 
-class Window(Frame):
+class Window():
     def __init__(self):
         self.win = Tk()
         self.win.title("Sudoku Generator")
-        self.win.geometry("300x300")
+        self.win.geometry("300x350")
         self.win.resizable(width=False, height=False)
         self.win.configure(bg="white")
-        super().__init__(self.win)
-        self.canvas = Canvas(self.win, bg="white", height = 300, width = 300)
+        #super().__init__(self.win)
+        self.canvas = Canvas(self.win, bg="white", height = 350, width = 300)
         self.labels = [[Label(background="white",font=("MSゴシック", "10", "bold")) for i in range(9)] for j in range(9)]
         for i in range(9):
             for j in range(9):
-                self.labels[i][j].place(x=27+30*j,y=17+30*i)
-        self.generate()
+                self.labels[i][j].place(x=25+30*j,y=17+30*i)
+        self.message = Label(background="white",font=("MSゴシック", "20"))
+        self.message.place(x=50,y=300)
+        self.message["text"] = "Press Space Key"
+        self.draw_line()
+        self.win.bind("<space>",self.press)
+        self.is_drew = False
         self.update()
 
     def update(self):
-        self.draw()
+        if self.is_drew:
+            self.generate()
+            self.draw()
+            self.is_drew = False
         self.win.after(50,self.update)
 
+    def press(self,event):
+        self.is_drew = True
+
     def draw(self):
-        for i in range(10):
-            self.canvas.create_line(20,10+30*i,290,10+30*i,fill='black')
-            self.canvas.create_line(20+i*30,10,20+i*30,280,fill='black')
-        self.canvas.pack()
         for i in range(9):
             for j in range(9):
                 if self.ge.gearr[i][j] != 0:
                     self.labels[i][j]["text"] = str(self.ge.gearr[i][j])
+                else:
+                    self.labels[i][j]["text"] = ""
+
+    def draw_line(self):
+        for i in range(10):
+            self.canvas.create_line(15,10+30*i,286,10+30*i,fill='black')
+            self.canvas.create_line(15+i*30,10,15+i*30,281,fill='black')
+            if i % 3 == 0:
+                self.canvas.create_line(15,11+30*i,286,11+30*i,fill='black')
+                self.canvas.create_line(16+i*30,10,16+i*30,281,fill='black')
+        self.canvas.pack()
 
     def delete(self):
         pass
