@@ -2,7 +2,7 @@
 ![数独](sudoku_generator.gif)
 
 ## explanation
-Each time you press the spacebar, the application generate a Sudoku.
+Each time you press the spacebar, the application generate Sudoku.
 
 ## build
 ```
